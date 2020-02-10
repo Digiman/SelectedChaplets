@@ -1,0 +1,24 @@
+﻿{
+  "profiles": {
+    "TestFileGenerator": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "TFG_ENVIRONMENT": "Local"
+      }
+    },
+    "TestFileGenerator-GenerateFile": {
+      "commandName": "Project",
+      "commandLineArgs": "generate",
+      "environmentVariables": {
+        "TFG_ENVIRONMENT": "Local"
+      }
+    },
+    "TestFileGenerator-GenerateFile-Custom": {
+      "commandName": "Project",
+      "commandLineArgs": "generate -s 20 -sb 4",
+      "environmentVariables": {
+        "TFG_ENVIRONMENT": "Local"
+      }
+    }
+  }
+}
