@@ -13,9 +13,16 @@
         "TFG_ENVIRONMENT": "Local"
       }
     },
-    "TestFileGenerator-GenerateFile-Custom": {
+    "TestFileGenerator-GenerateFile-Custom-Russian": {
       "commandName": "Project",
       "commandLineArgs": "generate -s 20 -sb 4",
+      "environmentVariables": {
+        "TFG_ENVIRONMENT": "Local"
+      }
+    },
+    "TestFileGenerator-GenerateFile-Custom-English": {
+      "commandName": "Project",
+      "commandLineArgs": "generate -s 20 -sb 4 -l en",
       "environmentVariables": {
         "TFG_ENVIRONMENT": "Local"
       }

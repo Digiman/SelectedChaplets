@@ -1,6 +1,7 @@
 ﻿using System.Globalization;
 using System.IO;
 using CsvHelper;
+using TestFileGenerator.Enums;
 using TestFileGenerator.Interfaces;
 using TestFileGenerator.Models;
 
@@ -11,7 +12,7 @@ namespace TestFileGenerator.Savers
     /// </summary>
     public sealed class CSVFileSaver : IFileSaver
     {
-        public void SaveDataToFile(string filename, Group group)
+        public void SaveDataToFile(string filename, Group @group, Language language)
         {
             using (var file = File.Open(filename, FileMode.Create))
             {
@@ -20,9 +21,7 @@ namespace TestFileGenerator.Savers
                     using (var csvWriter = new CsvWriter(writer, CultureInfo.InvariantCulture))
                     {
                         // 1. Write header.
-                        csvWriter.WriteField("Фамилия");
-                        csvWriter.WriteField("Имя");
-                        csvWriter.WriteField("Отчество");
+                        WriteHeader(csvWriter, language);
                         foreach (var subject in group.Subjects)
                         {
                             csvWriter.WriteField(subject);
@@ -34,7 +33,7 @@ namespace TestFileGenerator.Savers
                         {
                             csvWriter.WriteField(student.Name);
                             csvWriter.WriteField(student.Surname);
-                            csvWriter.WriteField(student.LastName);
+                            csvWriter.WriteField(student.MiddleName);
 
                             foreach (var mark in student.Marks)
                             {
@@ -45,6 +44,23 @@ namespace TestFileGenerator.Savers
                         }
                     }
                 }
+            }
+        }
+
+        private void WriteHeader(CsvWriter csvWriter, Language language)
+        {
+            switch (language)
+            {
+                case Language.English:
+                    csvWriter.WriteField("Surname");
+                    csvWriter.WriteField("Name");
+                    csvWriter.WriteField("Middle Name");
+                    break;
+                case Language.Russian:
+                    csvWriter.WriteField("Фамилия");
+                    csvWriter.WriteField("Имя");
+                    csvWriter.WriteField("Отчество");
+                    break;
             }
         }
     }
